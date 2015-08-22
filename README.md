@@ -7,5 +7,5 @@ Moe Search
 [测试地址](https://moe.return.moe)
 
 ## 使用说明
-把fetch.php中http://serverName修改为自己的地址。
+把search.php中http://serverName修改为自己的地址。
 
