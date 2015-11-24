@@ -36,7 +36,7 @@
         <div class="mod-head"> 
          <div class="tabbable"> 
           <ul class="nav nav-tabs aw-nav-tabs active" id="list_nav"> 
-           <h2 class=""> <p>搜索结果<small>   <?php echo $data['num'][0]?></small> </p> </h2> 
+           <h2 class=""> <p>搜索结果<small>   <?php echo $num?>条</small> </p> </h2> 
           </ul> 
          </div> 
         </div> 
@@ -44,21 +44,21 @@
          <div class="tab-content"> 
           <div class="tab-pane active" style="word-break:break-all;"> 
            <div id="search_result"> 
-            <?php if(empty($data['name'])):?>
+            <?php if($data['status'] == 'failure'):?>
 
             <div class="aw-item active"> 
              <h1 style="font-size:20px;">哥哥，不要搜奇怪的东西辣！我已经报警了！！</h1> 
             </div>
 
           <?php else:?>
-            <?php foreach($data['name'] as $key => $value):?>
+            <?php foreach($data['result'] as $key => $value):?>
          
             <div class="aw-item active"> 
              <p class="aw-title"> </p>
-             <h1 style="font-size:20px;"><a href="<?php echo $data['url'][$key]?>" target="_blank"><?php echo $data['name'][$key]?></a></h1> 
+             <h1 style="font-size:20px;"><a href="<?php echo $value[$key]?>" target="_blank"><?php echo $value['name']?></a></h1> 
              <p></p> 
-             <p class="content"><?php echo $data['desc'][$key]?></p> 
-             <p class="aw-text-color-green"> <?php echo $data['url'][$key]?> </p> 
+             <p class="content"><?php echo $value['desc']?></p> 
+             <p class="aw-text-color-green"> <?php echo $value['url']?> </p> 
             </div> 
 
           <?php endforeach;?>  

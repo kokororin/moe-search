@@ -7,5 +7,5 @@ Moe Search
 [测试地址](https://niconiconi.science)
 
 ## 使用说明
-默认抓取源为第三方镜像，你可以替换为官方源。
+抓取源为 Kotori API。
 
