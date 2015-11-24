@@ -7,5 +7,5 @@ Moe Search
 [测试地址](https://niconiconi.science)
 
 ## 使用说明
-把search.php中http://serverName修改为自己的地址。
+默认抓取源为第三方镜像，你可以替换为官方源。
 

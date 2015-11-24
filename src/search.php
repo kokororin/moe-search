@@ -9,15 +9,15 @@ if (!isset($_GET['word'])) {
     $word = $_GET['word'];
 }
 
-if (isset($_GET['page'])) {
-    $page = $_GET['page'];
-} else {
-    $page = 1;
-}
-
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
 
 include './includes/phpQuery.php';
-phpQuery::newDocumentFile('http://serverName/fetch.php?word=' . urlencode($word) . '&page=' . $page);
+
+//phpQuery::newDocumentFile(get_base() . 'fetch.php?word=' . urlencode($word) . '&page=' . $page);
+$prefix = 'http://www.guge.link/';
+$start  = ($page - 1) * 10;
+phpQuery::newDocumentFile($prefix . 'search?q=' . urlencode($word) . '&start=' . $start);
+
 $list = pq('.g');
 foreach ($list as $li) {
     $data['name'][] = pq($li)->find('.r')->find('a')->html();
@@ -37,13 +37,11 @@ foreach ($data['url'] as $key => $value) {
     }
 }
 
-/*echo '<pre>';
-var_dump($data);
-echo '</pre>';*/
 
 include './includes/page.class.php';
 $pager      = new Page(10, $data['num'][1], $page, 10);
 $pager_html = $pager->show();
+
 function get_true_url($string)
 {
     $start = '/url?q=';
@@ -63,6 +61,28 @@ function get_true_url($string)
 function get_number($str)
 {
     return preg_replace('/\D/s', '', $str);
+}
+
+function get_base()
+{
+    if (isset($_SERVER['HTTP_HOST']) && preg_match('/^((\[[0-9a-f:]+\])|(\d{1,3}(\.\d{1,3}){3})|[a-z0-9\-\.]+)(:\d+)?$/i', $_SERVER['HTTP_HOST'])) {
+        $base_url = (is_secure() ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST']
+        . substr($_SERVER['SCRIPT_NAME'], 0, strpos($_SERVER['SCRIPT_NAME'], basename($_SERVER['SCRIPT_FILENAME'])));
+    } else {
+        $base_url = 'http://localhost/';
+    }
+    return rtrim($base_url, '/') . '/';
+}
+function is_secure()
+{
+    if (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off') {
+        return true;
+    } elseif (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && 'https' === $_SERVER['HTTP_X_FORWARDED_PROTO']) {
+        return true;
+    } elseif (!empty($_SERVER['HTTP_FRONT_END_HTTPS']) && strtolower($_SERVER['HTTP_FRONT_END_HTTPS']) !== 'off') {
+        return true;
+    }
+    return false;
 }
 
 include './tpl/results.html';
