@@ -2,17 +2,17 @@
 <html>
 <head>
 <title>Moe Search - 萌搜索</title>
-<?php include 'head.html';?>
+<?php include dirname(__FILE__) . '/head.html';?>
 <style>
 .container .logo{text-align:center;margin-top:5%}.container .logo h1{font-size:70px;margin-bottom:30px;color:#fff}.container .logo h2{font-size:60px;margin-bottom:50px;color:#fff}.ss button{padding:12px 16px 11px}.container .logo .input-group{margin-top:20px}.container .logo .input-group-btn{width:1%}.aw-footer{bottom:0;position:fixed;width:100%}h4{color:#fff}
 </style>
 </head>
 <body>
-<?php include 'no-script.html';?>
+<?php include dirname(__FILE__) . '/no-script.html';?>
 	<div class="aw-top-menu-wrap">
 		<div class="container">
 			<div class="aw-logo">
-				<a href="/"></a>
+				<a href="<?php echo get_base();?>"></a>
 			</div>
 		</div>
 	</div>	
@@ -38,7 +38,7 @@
 
 </div>
 
-<?php include 'foot.html';?>
+<?php include dirname(__FILE__) . '/foot.html';?>
 
 </body>
 </html>

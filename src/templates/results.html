@@ -2,14 +2,14 @@
 <html>
  <head> 
   <title><?php echo $word?> - Moe Search - 萌搜索</title> 
-  <?php include 'head.html';?>
+  <?php include dirname(__FILE__) . '/head.html';?>
  </head> 
  <body>
-  <?php include 'no-script.html';?>
+  <?php include dirname(__FILE__) . '/no-script.html';?>
   <div class="aw-top-menu-wrap"> 
    <div class="container"> 
     <div class="aw-logo"> 
-     <a data-no-instant href="/"></a> 
+     <a data-no-instant href="<?php echo get_base();?>"></a> 
     </div> 
     <div class="aw-top-nav navbar"> 
      <nav role="navigation" class="collapse navbar-collapse bs-navbar-collapse"> 
@@ -36,7 +36,7 @@
         <div class="mod-head"> 
          <div class="tabbable"> 
           <ul class="nav nav-tabs aw-nav-tabs active" id="list_nav"> 
-           <h2 class=""> <p>搜索结果<small>   <?php echo $num?>条</small> </p> </h2> 
+           <h2 class=""> <p>搜索结果<small>   <?php echo $count['number'];?>条</small> </p> </h2> 
           </ul> 
          </div> 
         </div> 
@@ -44,20 +44,20 @@
          <div class="tab-content"> 
           <div class="tab-pane active" style="word-break:break-all;"> 
            <div id="search_result"> 
-            <?php if($data['status'] == 'failure'):?>
+            <?php if(count($data) == 0):?>
 
             <div class="aw-item active"> 
              <h1 style="font-size:20px;">哥哥，不要搜奇怪的东西辣！我已经报警了！！</h1> 
             </div>
 
           <?php else:?>
-            <?php foreach($data['result'] as $key => $value):?>
+            <?php foreach($data as $key => $value):?>
          
             <div class="aw-item active"> 
              <p class="aw-title"> </p>
-             <h1 style="font-size:20px;"><a href="<?php echo $value[$key]?>" target="_blank"><?php echo $value['name']?></a></h1> 
+             <h1 style="font-size:20px;"><a href="<?php echo $value[$key]?>" target="_blank"><?php echo $value['title']?></a></h1> 
              <p></p> 
-             <p class="content"><?php echo $value['desc']?></p> 
+             <p class="content"><?php echo $value['content']?></p> 
              <p class="aw-text-color-green"> <?php echo $value['url']?> </p> 
             </div> 
 
@@ -78,7 +78,7 @@
    </div> 
   </div> 
 
-<?php include 'foot.html';?>
+<?php include dirname(__FILE__) . '/foot.html';?>
 <script src="./static/js/instantclick.min.js" data-no-instant></script>
 <script data-no-instant>InstantClick.init();</script>
  </body>
