@@ -6,6 +6,3 @@ Moe Search
 
 [测试地址](https://niconicono.science)
 
-## 使用说明
-抓取源为 Kotori API。
-
